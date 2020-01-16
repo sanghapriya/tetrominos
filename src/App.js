@@ -1,24 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import GenerateCell from './hooks/generateCell';
+
+
+
+const getCell = () => {
+
+  const dots = new Array(100);
+
+  return dots.map(dot => GenerateCell())
+};
+
 
 function App() {
+  
+  let width = window.innerWidth;
+  let height = window.innerHeight;
+
+  let x = Math.floor(Math.random() * width);
+  let y = Math.floor(Math.random() * height);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <svg width={width} height={height}>
+        {GenerateCell()}
+        {GenerateCell()}
+        {GenerateCell()}
+        {GenerateCell()}
+        {GenerateCell()}
+        {GenerateCell()}
+        {GenerateCell()}
+        {GenerateCell()}
+      
+    </svg>
+
     </div>
   );
 }
