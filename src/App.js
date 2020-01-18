@@ -30,6 +30,15 @@ function App() {
         {GenerateCell()}
         {GenerateCell()}
         {GenerateCell()}
+        {GenerateCell()}
+        {GenerateCell()}
+        {GenerateCell()}
+        {GenerateCell()}
+        {GenerateCell()}
+        {GenerateCell()}
+        {GenerateCell()}
+        {GenerateCell()}
+      
       
     </svg>
 
