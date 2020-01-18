@@ -1,6 +1,8 @@
 import React from 'react';
+import {CELL_WIDTH} from '../utility/constants';
 
 export default function Cell (props)  {
-    console.log(props);
-    return <rect style={{fill: "red"}} x={props.x} y={props.y} width="10" height="10"/>
+    
+    return <rect style={{fill: "red",stroke: "black" , strokeWidth: "1px"}} 
+                        x={props.x} y={props.y} width={CELL_WIDTH} height={CELL_WIDTH}/>
 }

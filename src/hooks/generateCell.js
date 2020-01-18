@@ -1,30 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Tetromino from '../components/tetromino.component';
 
-const GenerateCell = () => {
+const GenerateCell = (y) => {
 
-    const width = window.innerWidth;
-    const height = window.innerHeight;
+    let x = Math.floor(Math.random()*window.innerWidth);
     
-  
-    const initialCoordinate = {
-                              x:Math.floor(Math.random() * width),
-                              y:Math.floor(Math.random() * height)
-                          };
-  
-    const [coordinate, setCoordinate] = useState(initialCoordinate);
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCoordinate({
-                x:Math.floor(Math.random() * width),
-                y:Math.floor(Math.random() * height)
-            });
-        }, 1000);
-        return () => clearInterval(interval);
-      }, []);
     
-      return <Tetromino x={coordinate.x} y = {coordinate.y}/>
+   
+      return <Tetromino x={x} y={y}/>
 
       };
 
