@@ -1,13 +1,9 @@
 import React from 'react';
 import Tetromino from '../components/tetromino.component';
 
-const GenerateCell = (y) => {
+const GenerateCell = (x,y,tetrominoType) => {
 
-    let x = Math.floor(Math.random()*window.innerWidth);
-    
-    
-   
-      return <Tetromino x={x} y={y}/>
+      return <Tetromino x={x} y={y} tetrominoType={tetrominoType}/>
 
       };
 

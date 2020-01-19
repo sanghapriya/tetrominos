@@ -4,7 +4,7 @@ import {CELL_WIDTH} from '../utility/constants'
 
 
 
-const tetrominos = ( x, y, tetrominoType) => {
+export const tetrominos = ( x, y, tetrominoType) => {
     
 switch(tetrominoType){
 
@@ -53,8 +53,8 @@ switch(tetrominoType){
 
 
 
-export const randomTetromino = (x,y) => {
+export const randomTetrominoType = () => {
     const tetromions = 'IJLOT';
     const randTetromino = tetromions[Math.floor(Math.random() * tetromions.length)]
-    return tetrominos(x,y,randTetromino)
+    return randTetromino
 };

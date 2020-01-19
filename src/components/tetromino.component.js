@@ -1,9 +1,9 @@
-import {randomTetromino} from '../utility/generateTetromino'
+import {tetrominos} from '../utility/generateTetromino'
 
 export default function Tetromino (props)  {
     
 
   
-      return(randomTetromino(props.x,props.y));
+      return(tetrominos(props.x,props.y,props.tetrominoType));
          
 }
