@@ -1,6 +1,6 @@
 import React from 'react';
 import GenerateCells from './hooks/generateCells';
-
+import GenerateTraveller from './hooks/generateTraveller';
 
 
 
@@ -10,10 +10,16 @@ function App() {
   let height = window.innerHeight;
 
   return (
-    <div>
+    <div onKeyDown={() => console.log("keyPressed")}>
       <svg width={width} height={height} style = {{backgroundColor:"61B5FF"}}>
-        {GenerateCells()}      
-    </svg>
+        {GenerateCells()} 
+        {GenerateTraveller()}     
+
+          
+    </svg>  
+          
+   
+    
 
     </div>
   );

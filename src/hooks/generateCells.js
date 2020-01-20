@@ -18,6 +18,7 @@ const generateMultipleCells = () => {
       x:x,
       y:y,
       tetrominoType:tetrominoType,
+      rate:[80,100,110,120,150,160,175,180,200,210,220][Math.floor(Math.random() * 11)],
       cell:GenerateCell(x,y,tetrominoType)
     }
 
@@ -37,7 +38,7 @@ const updateMultipleCells = (elements) => {
   return elements.map((element) => {
                                     return {
                                       ...element,
-                                      x:element.x<10?window.innerWidth:element.x-150,
+                                      x:element.x<10?window.innerWidth:element.x-element.rate,
                                       cell:GenerateCell(element.x-1,element.y,element.tetrominoType)
                                        }
                                     
