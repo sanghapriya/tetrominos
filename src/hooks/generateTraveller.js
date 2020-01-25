@@ -1,43 +1,60 @@
-import React,{ useState, useEffect } from 'react';
+import React,{ useState,useEffect, useContext } from 'react';
+import {ElementContext} from '../context/mainContext';
 import Traveller from '../components/traveller.component';
 
-
-
-const initialTravellerConfiguration = () => {
-    
-    return {
-            x:window.innerWidth/2,
-            y:window.innerHeight/2,
-            traveller:<svg><Traveller x={window.innerWidth/2} y={window.innerHeight/2} /></svg>
-            }
-}
-
-
-const updateTravellerConfiguration = (x,y) => {
-    
-    return {
-            x:x,
-            y:y,
-            traveller:<svg><Traveller x={x} y={y} /></svg>
-            }
-}
-
-
-const pickUpTraveller =(e) => {
-
-    updateTravellerConfiguration(e.clientX,e.clientY);
-}
 
 const GenerateTraveller = () => {
 
   
   
 
-    const [traveller, setTraveller] = useState(initialTravellerConfiguration());
+    const [elements, setElements] = useContext(ElementContext);
     
   
-    return traveller.traveller
-  };
+    return <svg 
+                onMouseDown ={ (e) => setElements({...elements,travellerDetails:{grab:true,x:e.clientX,y:e.clientY}})}
+                onMouseMove = {(e) => {     
+                                        e.persist();
+                                        console.log(e)
+                                       if (elements.travellerDetails.grab) {
+                                       return setElements(
+                                                    {...elements,   
+                                                        travellerDetails:{
+                                                                    grab:elements.travellerDetails.grab, 
+                                                                    x:(elements.travellerDetails.grab?e.clientX:elements.travellerDetails.x),
+                                                                    y:(elements.travellerDetails.grab?e.clientY:elements.travellerDetails.y)
+                                                                    }})
+                                                                }
+                                        else {return elements}
+                                                                
+                                                
+                                                }}
+
+                // onMouseOut = {(e) => {   
+                                                        
+                                    
+                //                                         return setElements({...elements,   
+                //                                                             travellerDetails:
+                //                                                                 {...elements.travellerDetails,
+                //                                                                 grab:false,
+                //                                                                 }
+                //                                                             })
+                //                                                               }}
+                onMouseUp = {(e) => {   
+                                        console.log("Mouse Up");
+                                        console.log(elements.travellerDetails);
+                    
+                                        return setElements({...elements,   
+                                                            travellerDetails:
+                                                                {...elements.travellerDetails,
+                                                                grab:false,
+                                                                x:e.clientX,
+                                                                y:e.clientY}
+                                                            })
+                                                              }}>
+                        <Traveller x={elements.travellerDetails.x} y={elements.travellerDetails.y } />
+                    </svg>; 
+                    }
 
 
   export default GenerateTraveller;
