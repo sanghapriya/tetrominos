@@ -5,9 +5,6 @@ import Traveller from '../components/traveller.component';
 
 const GenerateTraveller = () => {
 
-  
-  
-
     const [elements, setElements] = useContext(ElementContext);
     
   
@@ -30,21 +27,8 @@ const GenerateTraveller = () => {
                                                 
                                                 }}
 
-                // onMouseOut = {(e) => {   
-                                                        
-                                    
-                //                                         return setElements({...elements,   
-                //                                                             travellerDetails:
-                //                                                                 {...elements.travellerDetails,
-                //                                                                 grab:false,
-                //                                                                 }
-                //                                                             })
-                //                                                               }}
                 onMouseUp = {(e) => {   
-                                        console.log("Mouse Up");
-                                        console.log(elements.travellerDetails);
-                    
-                                        return setElements({...elements,   
+                                         return setElements({...elements,   
                                                             travellerDetails:
                                                                 {...elements.travellerDetails,
                                                                 grab:false,

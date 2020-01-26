@@ -11,8 +11,8 @@ const generateMultipleCells = () => {
     let elements =[];
 
     for (var i = 0; i < 10; i++) {
-      let x = window.innerWidth;
-      let y = Math.floor(Math.random()*window.innerHeight);
+      let x = window.innerWidth-20;
+      let y = Math.floor(Math.random()*window.innerHeight-20);
       let tetrominoType = randomTetrominoType();
   
       let element ={
@@ -70,7 +70,7 @@ export const ElementProvider = props => {
                     const interval = setInterval(() => {
                         
                         setElements(elements => updateMultipleCells(elements));
-                    }, 1000);
+                    }, 500);
                     return () => clearInterval(interval);
                     }, []);
 
