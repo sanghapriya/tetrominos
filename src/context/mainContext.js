@@ -1,6 +1,6 @@
 import React, {useState,useEffect,createContext} from 'react';
 import GenerateCell from '../hooks/generateCell';
-import {randomTetrominoType} from '../utility/generateTetromino';
+import {randomTetrominoType,getTetrominosEachCellLocation} from '../utility/generateTetromino';
 
 export const ElementContext = createContext();
 
@@ -33,11 +33,14 @@ const generateMultipleCells = () => {
 
   const updateMultipleCells = (elements) => {
 
+    checkCollision(elements)
+
 
     return {
       ...elements,
       score:elements.score+1,
       cellDetails:elements.cellDetails.map((cellDetail) => {
+                                      
                                       return {
                                         ...cellDetail,
                                         x:cellDetail.x<10?window.innerWidth:cellDetail.x-cellDetail.rate,
@@ -49,6 +52,20 @@ const generateMultipleCells = () => {
           }
 }
 
+
+const checkCollision = (elements) => {
+
+ elements.cellDetails.map((cellDetail) => {
+
+  console.log(getTetrominosEachCellLocation(cellDetail.x,cellDetail.y,cellDetail.tetrominoType))
+
+  return
+
+
+  })
+
+
+}
 
 
 
@@ -70,6 +87,8 @@ export const ElementProvider = props => {
                     const interval = setInterval(() => {
                         
                         setElements(elements => updateMultipleCells(elements));
+                        
+                        
                     }, 500);
                     return () => clearInterval(interval);
                     }, []);
