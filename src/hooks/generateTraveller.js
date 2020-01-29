@@ -8,11 +8,11 @@ const GenerateTraveller = () => {
     const [elements, setElements] = useContext(ElementContext);
     
   
-    return <svg 
+    return <div 
                 onMouseDown ={ (e) => setElements({...elements,travellerDetails:{grab:true,x:e.clientX,y:e.clientY}})}
                 onMouseMove = {(e) => {     
                                         e.persist();
-                                        console.log(e)
+                                        
                                        if (elements.travellerDetails.grab) {
                                        return setElements(
                                                     {...elements,   
@@ -37,7 +37,7 @@ const GenerateTraveller = () => {
                                                             })
                                                               }}>
                         <Traveller x={elements.travellerDetails.x} y={elements.travellerDetails.y } />
-                    </svg>; 
+                    </div>; 
                     }
 
 

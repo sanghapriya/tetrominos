@@ -8,43 +8,43 @@ export const tetrominos = ( x, y, tetrominoType) => {
     
 switch(tetrominoType){
 
-        case "I" : return <svg>
+        case "I" : return <div>
                         <Cell x={x-CELL_WIDTH} y={y}  />
                         <Cell x={x} y={y} />
                         <Cell x={x+CELL_WIDTH} y={y}  />
                         <Cell x={x+2*CELL_WIDTH} y={y}  />
-                        </svg>;
+                        </div>;
         
-        case "J": return <svg>
+        case "J": return <div>
                     <Cell x={x} y={y-2*CELL_WIDTH}  />
                     <Cell x={x} y={y-CELL_WIDTH} />
                     <Cell x={x} y={y}  />
                     <Cell x={x-CELL_WIDTH} y={y}  />
-                    </svg>;
+                    </div>;
 
          case "O": 
-                return <svg>
+                return <div>
                     <Cell x={x} y={y-CELL_WIDTH}  />
                     <Cell x={x-CELL_WIDTH} y={y-CELL_WIDTH} />
                     <Cell x={x} y={y}  />
                     <Cell x={x-CELL_WIDTH} y={y}  />
-                    </svg>;
+                    </div>;
          case "L": 
-           return  <svg>
+           return  <div>
                     <Cell x={x} y={y-2*CELL_WIDTH}  />
                     <Cell x={x} y={y-CELL_WIDTH} />
                     <Cell x={x} y={y}  />
                     <Cell x={x+CELL_WIDTH} y={y}  />
-                    </svg>;
+                    </div>;
         case "T": 
-            return <svg>
+            return <div>
                     <Cell x={x-CELL_WIDTH} y={y}  />
                     <Cell x={x} y={y} />
                     <Cell x={x+CELL_WIDTH} y={y}  />
                     <Cell x={x} y={y+CELL_WIDTH}  />
-                    </svg>;
+                    </div>;
         default:
-                return <svg></svg>
+                return <div></div>
 
 
     }

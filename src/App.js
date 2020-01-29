@@ -9,7 +9,7 @@ function App() {
 
   return (
 
-      <ElementProvider>
+      <ElementProvider onKeyPressed = { console.log("Key is pressed")}>
         <GenerateScore/>
         <GenerateGameArea/>
       </ElementProvider>

@@ -2,6 +2,7 @@ import GenerateCells from './generateCells';
 import GenerateTraveller from './generateTraveller';
 import React,{ useState,useEffect, useContext } from 'react';
 import {ElementContext} from '../context/mainContext';
+import {StyledStage} from './style/StyledStage';
 
 
 const GenerateGameArea = () => {
@@ -10,7 +11,9 @@ const GenerateGameArea = () => {
     let height = window.innerHeight-20;
     const [elements, setElements] = useContext(ElementContext);
   
-    return <svg width={width} height={height} style = {{backgroundColor:"61B5FF"}}
+    // return <svg width={width} height={height} style = {{backgroundColor:"61B5FF"}}
+       return   <StyledStage width={width} height={height}
+                onKeyDown = {()=>{console.log("Hello World")}}
                 onMouseMove = {(e) => {     
                                         e.persist();
                                         
@@ -37,7 +40,7 @@ const GenerateGameArea = () => {
                                                             }}   > 
     <GenerateCells/>
     <GenerateTraveller/>
-    </svg>  
+    </StyledStage>  
   };
   
   

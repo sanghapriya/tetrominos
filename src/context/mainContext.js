@@ -1,6 +1,7 @@
 import React, {useState,useEffect,createContext} from 'react';
 import GenerateCell from '../hooks/generateCell';
 import {randomTetrominoType,getTetrominosEachCellLocation} from '../utility/generateTetromino';
+import {CELL_WIDTH} from '../utility/constants';
 
 export const ElementContext = createContext();
 
@@ -57,15 +58,30 @@ const checkCollision = (elements) => {
 
  elements.cellDetails.map((cellDetail) => {
 
-  console.log(getTetrominosEachCellLocation(cellDetail.x,cellDetail.y,cellDetail.tetrominoType))
+  let fields = [["x1","y1"],["x2","y2"],["x3","y3"],["x4","y4"]];
+
+  let coordinateDict = getTetrominosEachCellLocation(cellDetail.x,cellDetail.y,cellDetail.tetrominoType);
+
+  fields.forEach(field => {
+    let originX = coordinateDict[field[0]];
+    let originY = coordinateDict[field[1]];
+    let cellCoordinate = {x1:originX,
+                      y1:originY,
+                      x2:originX+CELL_WIDTH,
+                      y2:originY,
+                      x3:originX+CELL_WIDTH,
+                      y3:originX-CELL_WIDTH,
+                      x4:originX,
+                      y4:originX-CELL_WIDTH}
+    
 
   return
 
 
   })
 
-
-}
+ })
+};
 
 
 
