@@ -11,7 +11,7 @@ const generateMultipleCells = () => {
 
     let elements =[];
 
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < 4; i++) {
       let x = window.innerWidth-20;
       let y = Math.floor(Math.random()*window.innerHeight-20);
       let tetrominoType = randomTetrominoType();
@@ -33,62 +33,78 @@ const generateMultipleCells = () => {
 
 
   const updateMultipleCells = (elements) => {
+    console.log(elements);
 
-    checkCollision(elements)
-
-
-    return {
-      ...elements,
-      score:elements.score+1,
-      cellDetails:elements.cellDetails.map((cellDetail) => {
-                                      
-                                      return {
-                                        ...cellDetail,
-                                        x:cellDetail.x<10?window.innerWidth:cellDetail.x-cellDetail.rate,
-                                        cell:GenerateCell(cellDetail.x-1,cellDetail.y,cellDetail.tetrominoType)
-                                        }
-                                      
-                              
-                                    })
-          }
+    if(checkCollision(elements) & elements.isUpdate){
+      return {
+        ...elements,
+        isUpdate:false
+      }
+    }
+    else{
+      if(elements.isUpdate){
+      
+      return {
+          ...elements,
+          score:elements.score+1,
+          cellDetails:elements.cellDetails.map((cellDetail) => {
+                                          
+                                          return {
+                                            ...cellDetail,
+                                            x:cellDetail.x<10?window.innerWidth:cellDetail.x-10,
+                                            cell:GenerateCell(cellDetail.x-1,cellDetail.y,cellDetail.tetrominoType)
+                                            }
+                                          
+                                  
+                                        })
+              }
+            }
+            else{
+              return elements
+            }}
 }
 
 
-const checkCollision = (elements) => {
+function checkCollision(elements) {
 
- elements.cellDetails.map((cellDetail) => {
+  let collisionFlag = false;
+  
+  
+ for (let cellindex in elements.cellDetails){
 
+  let cellDetail = elements.cellDetails[cellindex];
+  let coordinateDict = getTetrominosEachCellLocation(cellDetail.x,cellDetail.y,cellDetail.tetrominoType);
   let fields = [["x1","y1"],["x2","y2"],["x3","y3"],["x4","y4"]];
 
-  let coordinateDict = getTetrominosEachCellLocation(cellDetail.x,cellDetail.y,cellDetail.tetrominoType);
+  for (let fieldIndex in fields){
 
-  fields.forEach(field => {
-    let originX = coordinateDict[field[0]];
-    let originY = coordinateDict[field[1]];
-    let cellCoordinate = {x1:originX,
-                      y1:originY,
-                      x2:originX+CELL_WIDTH,
-                      y2:originY,
-                      x3:originX+CELL_WIDTH,
-                      y3:originX-CELL_WIDTH,
-                      x4:originX,
-                      y4:originX-CELL_WIDTH}
+    let field = fields[fieldIndex];
+    let rectCentreX = coordinateDict[field[0]]-CELL_WIDTH/2;
+    let rectCentreY = coordinateDict[field[1]]-CELL_WIDTH/2;
     
 
-  return
+    let collision = Math.pow((Math.pow((rectCentreX-elements.travellerDetails.x),2)+
+                    Math.pow((rectCentreY-elements.travellerDetails.y),2)),0.5)<CELL_WIDTH
 
+    if(collision & !collisionFlag){          
+                  // console.log("collision") 
+                  collisionFlag = true     
+                  
+                } 
+              }
+            }
 
-  })
-
- })
+          
+ return collisionFlag;
 };
 
 
 
 
 export const ElementProvider = props => {
-
+                
                 const [elements,setElements] =useState({
+                                                    isUpdate:true,
                                                     cellDetails: generateMultipleCells(),
                                                     score:0,
                                                     travellerDetails:{
@@ -98,16 +114,21 @@ export const ElementProvider = props => {
                                                                     }                                                        
                                                         });
 
+                                                 
+                      useEffect(() => {
+                        
+                          const interval = setInterval(() => {
 
-                useEffect(() => {
-                    const interval = setInterval(() => {
-                        
-                        setElements(elements => updateMultipleCells(elements));
-                        
-                        
-                    }, 500);
-                    return () => clearInterval(interval);
-                    }, []);
+                                                         
+                              setElements(elements => updateMultipleCells(elements));
+                              
+                              }
+                             
+                              
+                          , 100);
+                          return () => clearInterval(interval);
+                          }, []);
+                    
 
                 return (
                     <ElementContext.Provider value={[elements, setElements]}>

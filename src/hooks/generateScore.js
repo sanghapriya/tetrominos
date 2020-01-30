@@ -11,7 +11,7 @@ const GenerateScore = () => {
     const [elements, setElements] = useContext(ElementContext);
     
   
-    return  <Score score={elements.score} />
+    return  <Score score={elements.travellerDetails.x+" , "+elements.travellerDetails.y} />
 }
 
 

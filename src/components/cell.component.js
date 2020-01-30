@@ -8,4 +8,5 @@ export default function Cell (props)  {
     
     
     return <StyledCell color="red" x={props.x} y={props.y} width={CELL_WIDTH} height={CELL_WIDTH}/>
+            
 }
